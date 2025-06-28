@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSJ Passage de Classe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>CSJ MOYENNE BY FANFAN - Passage de Classe</h1>
+    <form id="passageForm">
+      <label for="m1">Moyenne 1ʳᵉ étape (ex: 53 ou 5.3) :</label>
+      <input type="number" id="m1" placeholder="ex: 53 ou 5.3" required />
+
+      <label for="m2">Moyenne 2ᵉ étape :</label>
+      <input type="number" id="m2" placeholder="ex: 53 ou 5.3" required />
+
+      <label for="m3">Moyenne 3ᵉ étape :</label>
+      <input type="number" id="m3" placeholder="ex: 53 ou 5.3" required />
+
+      <label for="m4">Moyenne 4ᵉ étape :</label>
+      <input type="number" id="m4" placeholder="ex: 53 ou 5.3" required />
+
+      <label for="m5">Moyenne 5ᵉ étape :</label>
+      <input type="number" id="m5" placeholder="ex: 53 ou 5.3" required />
+
+      <button type="submit">Calculer</button>
+    </form>
+    <div id="decision"></div>
+    <div style="margin-top: 30px; text-align: center; font-size: 14px; color: #555;">
+      Développé par <strong>FANFAN-TECHNO</strong><br>
+      📞 <a href="https://wa.me/50946183134" target="_blank" style="color:#0d47a1;text-decoration:none;">Contacter sur WhatsApp</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("passageForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      function normalize(val) {
+        return val > 10 ? val / 10 : val;
+      }
+
+      const m1 = normalize(parseFloat(document.getElementById("m1").value));
+      const m2 = normalize(parseFloat(document.getElementById("m2").value));
+      const m3 = normalize(parseFloat(document.getElementById("m3").value));
+      const m4 = normalize(parseFloat(document.getElementById("m4").value));
+      const m5 = normalize(parseFloat(document.getElementById("m5").value));
+
+      const moyenne = (m1 + m2 + m3 + m4 + m5) / 5;
+
+      let verdict = "";
+      if (moyenne < 5) {
+        verdict = "❌ Redouble";
+      } else if (moyenne < 5.3) {
+        verdict = "⚠️ Ajourné";
+      } else {
+        verdict = "✅ Passe en classe supérieure";
+      }
+
+      document.getElementById("decision").textContent = `Moyenne : ${moyenne.toFixed(2)} / 10 — ${verdict}`;
+    });
+  </script>
+</body>
+</html>

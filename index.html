@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSJ MOYENNE BY FANFAN - Étape 5</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>CSJ MOYENNE BY FANFAN</h1>
+    <form id="moyenneForm">
+      <div class="field-group" id="champs"></div>
+      <button type="submit">Calculer la moyenne sur 88</button>
+    </form>
+    <div id="resultat"></div>
+    <div class="link-passage">
+      <a href="page.html">→ Évaluer ton passage de classe</a>
+    </div>
+  </div>
+  <script>
+    const matieres = [
+      ["Méthodologie de base", 40], ["Éducation à la citoyenneté", 20],
+      ["Culture littéraire", 60], ["Musique & Art", 30], ["Anglais", 40],
+      ["Sciences religieuses", 20], ["Littérature haïtienne", 60],
+      ["Informatique", 20], ["Sciences sociales", 50], ["Español", 40],
+      ["Sciences physiques", 90], ["Chimie", 50], ["Géologie", 30],
+      ["Trigonométrie", 30], ["Analyses", 80], ["Bio-Physio", 50],
+      ["Économie", 30], ["Géométrie", 80], ["Créole", 30],
+      ["Sport", 10], ["Application", 20]
+    ];
+
+    const champsDiv = document.getElementById("champs");
+
+    matieres.forEach(([nom, points], index) => {
+      const label = document.createElement("label");
+      label.htmlFor = `note${index}`;
+      label.textContent = `${nom} (sur ${points})`;
+
+      const input = document.createElement("input");
+      input.type = "number";
+      input.id = `note${index}`;
+      input.name = `note${index}`;
+      input.min = 0;
+      input.max = points;
+      input.required = true;
+
+      champsDiv.appendChild(label);
+      champsDiv.appendChild(input);
+    });
+
+    document.getElementById("moyenneForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let totalObtenu = 0;
+      matieres.forEach((_, index) => {
+        const valeur = parseFloat(document.getElementById(`note${index}`).value);
+        if (!isNaN(valeur)) totalObtenu += valeur;
+      });
+      const moyenne = totalObtenu / 88;
+      document.getElementById("resultat").textContent = `Moyenne pour la 5ᵉ étape : ${moyenne.toFixed(2)} / 88`;
+    });
+  </script>
+</body>
+</html>
